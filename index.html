@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
+    <p id="hash"></p>
+</body>
+<script>
+    fetch('http://api.covid19api.com/summary')
+    .then( (apidata) =>{
+        // console.log(apidata);
+        return apidata.json();
+    })
+    .then( (actualdata) => {
+        console.log(actualdata);
+        var consts = actualdata.Countries[132];
+        // document.write(consts);
+        console.log(actualdata.Countries[132]);
+        document.getElementById('hash').innerHTML = ` The name of the country is ${consts.Country} . The TotalConfirmed
+ cases here is ${consts.TotalConfirmed} and the TotalDeaths is ${consts.TotalDeaths} and the TotalRecovered
+cases is ${consts.TotalRecovered}.`;
+    })
+    .catch( (error)=>{
+        console.log(error);
+    })
+</script>
+</html>
